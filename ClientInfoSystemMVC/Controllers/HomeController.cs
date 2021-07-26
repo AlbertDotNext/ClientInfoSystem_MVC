@@ -1,4 +1,5 @@
-﻿using ClientInfoSystemMVC.Models;
+﻿using ApplicationCore.ServiceInterfaces;
+using ClientInfoSystemMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,21 @@ namespace ClientInfoSystemMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IClientService _clientService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IClientService clientService)
         {
-            _logger = logger;
+            _clientService = clientService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> ClientList()
+        {
+            var clients = await _clientService.GetAllClients();
+            return View(clients);
         }
 
         public IActionResult Privacy()
