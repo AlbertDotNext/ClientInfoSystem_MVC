@@ -47,16 +47,16 @@ namespace Infrastructure.Services
             {
                 throw new NotFoundException("The client is not exists, please add this client first");
             }
-            var client = new Client
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Phones = model.Phones,
-                Email = model.Email,
-                Address = model.Address
-            };
 
-            var createdClient = await _clientRepository.UpdateAsync(client);
+
+            dbClient.Name = model.Name;
+            dbClient.Phones = model.Phones;
+            dbClient.Email = model.Email;
+            dbClient.Address = model.Address;
+            dbClient.AddedOn = model.AddedOn;
+           
+
+            var createdClient = await _clientRepository.UpdateAsync(dbClient);
             var clientResponse = new ClientResponseModel
             {
                 Id = createdClient.Id,
