@@ -11,5 +11,6 @@ namespace ApplicationCore.ServiceInterfaces
     {
         Task<List<ClientResponseModel>> GetAllClients();
         Task<ClientResponseModel> UpdateClientById(ClientRequestModel model);
+        Task DeleteClientById(int id);
     }
 }

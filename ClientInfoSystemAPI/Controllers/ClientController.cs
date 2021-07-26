@@ -32,10 +32,17 @@ namespace ClientInfoSystemAPI.Controllers
         }
 
         [HttpPut]
-        [Route("client")]
+        [Route("{id:int}")]
         public async Task<ActionResult> UpdateClient([FromBody] ClientRequestModel clientRequest)
         {
             await _clientService.UpdateClientById(clientRequest);
+            return Ok();
+        }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            await _clientService.DeleteClientById(id);
             return Ok();
         }
     }

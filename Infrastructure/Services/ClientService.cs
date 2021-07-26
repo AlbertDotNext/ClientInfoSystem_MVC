@@ -19,7 +19,6 @@ namespace Infrastructure.Services
             _clientRepository = clientRepository;
         }
 
-        
         public async Task<List<ClientResponseModel>> GetAllClients()
         {
             var clients = await _clientRepository.ListAllAsync();
@@ -66,6 +65,19 @@ namespace Infrastructure.Services
                 Email = createdClient.Email
             };
             return clientResponse;
+        }
+
+        public async Task DeleteClientById(int id)
+        {
+            var dbClient = await _clientRepository.GetByIdAsync(id);
+            if(dbClient == null)
+            {
+                throw new NotFoundException("Client not exists");
+            }
+
+            await _clientRepository.DeleteAsync(dbClient);
+
+            
         }
     }
 }
