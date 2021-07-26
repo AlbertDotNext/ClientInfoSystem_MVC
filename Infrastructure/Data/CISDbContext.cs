@@ -39,10 +39,8 @@ namespace Infrastructure.Data
         {
             builder.ToTable("Interactions");
             builder.HasKey(i => i.Id);
-            builder.HasOne(i => i.Client).WithMany(i => i.Interatctions).HasForeignKey(i => i.ClientId).IsRequired(false);
-            builder.HasOne(i => i.Employee).WithMany(i => i.Interactions).HasForeignKey(i => i.EmpId).IsRequired(false);
-            //builder.Property(i => i.ClientId).IsRequired(false);
-            //builder.Property(i => i.EmpId).IsRequired(false);
+            builder.Property(i => i.EmpId).IsRequired(false);
+            builder.Property(i => i.ClientId).IsRequired(false);
             builder.Property(i => i.IntType).HasMaxLength(1).HasColumnType("char");
             builder.Property(i => i.IntDate).HasColumnType("datetime");
             builder.Property(i => i.Remarks).HasMaxLength(500).HasColumnType("varchar");
