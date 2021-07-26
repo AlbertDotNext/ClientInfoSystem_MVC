@@ -17,13 +17,13 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Interatction> Interatctions { get; set; }
+        public DbSet<Interaction> Interatctions { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Client>(ConfigureClient);
-            modelBuilder.Entity<Interatction>(ConfigureInteraction);
+            modelBuilder.Entity<Interaction>(ConfigureInteraction);
             modelBuilder.Entity<Employee>(ConfigureEmployee);
         }
 
@@ -35,7 +35,7 @@ namespace Infrastructure.Data
             builder.Property(e => e.Password).HasMaxLength(10).HasColumnType("varchar");
             builder.Property(e => e.Designation).HasMaxLength(50).HasColumnType("varchar");
         }
-        private void ConfigureInteraction(EntityTypeBuilder<Interatction> builder)
+        private void ConfigureInteraction(EntityTypeBuilder<Interaction> builder)
         {
             builder.ToTable("Interactions");
             builder.HasKey(i => i.Id);

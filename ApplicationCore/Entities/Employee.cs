@@ -13,6 +13,6 @@ namespace ApplicationCore.Entities
         public string Password { get; set; }
         public string Designation { get; set; }
 
-        public ICollection<Interatction> Interactions { get; set; }
+        public ICollection<Interaction> Interactions { get; set; }
     }
 }

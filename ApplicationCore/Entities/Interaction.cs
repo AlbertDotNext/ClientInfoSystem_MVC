@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entities
 {
-    public class Interatction
+    public class Interaction
     {
         public int Id { get; set; }
         public int? ClientId { get; set; }

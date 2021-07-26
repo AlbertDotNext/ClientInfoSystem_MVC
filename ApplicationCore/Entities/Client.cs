@@ -15,6 +15,6 @@ namespace ApplicationCore.Entities
         public string Address { get; set; }
         public DateTime? AddedOn { get; set; }
 
-        public ICollection<Interatction> Interatctions { get; set; }
+        public ICollection<Interaction> Interatctions { get; set; }
     }
 }
