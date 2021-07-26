@@ -79,5 +79,30 @@ namespace Infrastructure.Services
 
             
         }
+
+        public async Task<ClientResponseModel> AddClient(ClientRequestModel model)
+        {
+            var client = new Client
+            {
+                Name = model.Name,
+                Phones = model.Phones,
+                Email = model.Email,
+                Address = model.Address,
+                AddedOn = model.AddedOn
+            };
+
+            var clientResponse = new ClientResponseModel
+            {
+                Id = client.Id,
+                Name = client.Name,
+                Phones = client.Phones,
+                Email = client.Email,
+                Address = client.Address,
+                AddedOn = client.AddedOn
+            };
+
+            var createdClient = await _clientRepository.AddAsync(client);
+            return clientResponse;
+        }
     }
 }

@@ -30,6 +30,12 @@ namespace ClientInfoSystemAPI.Controllers
             }
             return Ok(clients);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddClient([FromBody] ClientRequestModel clientRequest)
+        {
+            var client = await _clientService.AddClient(clientRequest);
+            return Ok(client);
+        }
 
         [HttpPut]
         [Route("{id:int}")]
