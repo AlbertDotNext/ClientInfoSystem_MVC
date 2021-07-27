@@ -1,0 +1,39 @@
+﻿@model List<ApplicationCore.Models.InteractionResponseModel>
+@{
+    ViewData["Title"] = "Interactions Page";
+}
+
+<div class="container-fluid">
+    <h1>Clients Information</h1>
+    <a class="btn btn-primary" >Add Interactions</a>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ClientName</th>
+                <th scope="col">EmployeeName</th>
+                <th scope="col">InteractionType</th>
+                <th scope="col">InteractionDate</th>
+                <th scope="col">Remarks</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var interaction in Model)
+            {
+                <tr>
+                    <th scope="row">@interaction.ClientName</th>
+                    <td>@interaction.EmployeeName</td>
+                    <td>@interaction.IntType</td>
+                    <td>@interaction.IntDate.Value.ToShortDateString()</td>
+                    <td>@interaction.Remarks</td>
+                    <td><a class="btn btn-primary" >Update</a></td>
+                    <td><a class="btn btn-danger" >Delete</a></td>
+                </tr>
+
+            }
+
+
+        </tbody>
+    </table>
+</div>
