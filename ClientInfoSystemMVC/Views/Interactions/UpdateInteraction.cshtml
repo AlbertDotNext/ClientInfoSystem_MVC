@@ -1,0 +1,39 @@
+﻿@model ApplicationCore.Models.InteractionRequestModel
+@{
+    ViewData["Title"] = "Update Interaction";
+}
+
+
+<div class="container-fluid">
+    <h1>Update Interaction</h1>
+    <form asp-action="UpdateInteraction">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="ClientId">ClientId</label>
+            <input type="text" class="form-control" asp-for="ClientId">
+
+        </div>
+        <div class="form-group">
+            <label asp-for="EmpId">EmployeeId</label>
+            <input type="text" class="form-control" asp-for="EmpId">
+
+        </div>
+        <div class="form-group">
+            <label asp-for="IntType">Interaction Type (Ex: Telephone: T, Skype: S, InPerson : I, WebEx: W)</label>
+            <input type="text" class="form-control" asp-for="IntType">
+
+        </div>
+        <div class="form-group">
+            <label asp-for="IntDate">Interaction Date</label>
+            <input type="date" class="form-control" asp-for="IntDate">
+
+        </div>
+        <div class="form-group">
+            <label asp-for="Remarks">Remarks</label>
+            <input type="text" class="form-control" asp-for="Remarks">
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
