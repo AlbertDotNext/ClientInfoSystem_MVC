@@ -11,5 +11,6 @@ namespace ApplicationCore.ServiceInterfaces
     {
         Task<List<InteractionResponseModel>> GetInteractions();
         Task<InteractionResponseModel> AddInteraction(InteractionRequestModel model);
+        Task<InteractionResponseModel> UpdateInteraction(int id, InteractionRequestModel model);
     }
 }

@@ -39,5 +39,13 @@ namespace ClientInfoSystemAPI.Controllers
             var interaction = await _interactionService.AddInteraction(requestModel);
             return Ok(interaction);
         }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> UpdateInteraction(int id, [FromBody] InteractionRequestModel requestModel)
+        {
+            var interaction = await _interactionService.UpdateInteraction(id, requestModel);
+            return Ok(interaction);
+        }
     }
 }

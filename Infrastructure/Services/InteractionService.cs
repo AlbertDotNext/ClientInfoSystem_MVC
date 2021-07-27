@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Models;
 using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
@@ -65,6 +66,35 @@ namespace Infrastructure.Services
             }
 
             return interactionList;
+        }
+
+        public async Task<InteractionResponseModel> UpdateInteraction(int id, InteractionRequestModel model)
+        {
+            var interaction = await _interactionRepository.GetByIdAsync(id);
+            if(interaction == null)
+            {
+                throw new NotFoundException("No interaction found");
+
+            }
+
+            interaction.ClientId = model.ClientId;
+            interaction.EmpId = model.EmpId;
+            interaction.IntType = model.IntType;
+            interaction.IntDate = model.IntDate;
+            interaction.Remarks = model.Remarks;
+
+            var updatedInteraction = new InteractionResponseModel
+            {
+                Id = interaction.Id,
+                ClientId = interaction.ClientId,
+                EmpId = interaction.EmpId,
+                IntType = interaction.IntType,
+                IntDate = interaction.IntDate,
+                Remarks = interaction.Remarks
+            };
+
+            await _interactionRepository.UpdateAsync(interaction);
+            return updatedInteraction;
         }
     }
 }
