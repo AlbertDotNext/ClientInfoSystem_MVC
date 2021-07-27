@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Exceptions;
+using ApplicationCore.Models;
 using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,13 @@ namespace ClientInfoSystemAPI.Controllers
                 throw new NotFoundException("Employee not found");
             }
             return Ok(employees);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee([FromBody] EmpInfoRequestModel requestModel)
+        {
+            var employee = await _employeeService.AddEmployee(requestModel);
+            return Ok(employee);
         }
     }
 }

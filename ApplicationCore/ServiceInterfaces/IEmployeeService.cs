@@ -10,5 +10,6 @@ namespace ApplicationCore.ServiceInterfaces
     public interface IEmployeeService
     {
         Task<List<EmpInfoResponseModel>> GetAllEmps();
+        Task<EmpInfoResponseModel> AddEmployee(EmpInfoRequestModel model);
     }
 }

@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Models;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
 using System;
@@ -16,6 +17,27 @@ namespace Infrastructure.Services
         public EmployeeService(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
+        }
+
+        public async Task<EmpInfoResponseModel> AddEmployee(EmpInfoRequestModel model)
+        {
+            var employee = new Employee
+            {
+                Name = model.Name,
+                Password = model.Password,
+                Designation = model.Designation
+            };
+
+            var empResponse = new EmpInfoResponseModel
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Password = employee.Password,
+                Designation = employee.Designation
+            };
+
+            var createdEmployee = await _employeeRepository.AddAsync(employee);
+            return empResponse;
         }
 
         public async Task<List<EmpInfoResponseModel>> GetAllEmps()
