@@ -1,4 +1,5 @@
-﻿using ApplicationCore.ServiceInterfaces;
+﻿using ApplicationCore.Models;
+using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,40 @@ namespace ClientInfoSystemMVC.Controllers
         {
             var employees = await _employeeService.GetAllEmps();
             return View(employees);
+        }
+
+        [HttpGet]
+        public IActionResult AddEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee(EmpInfoRequestModel requestModel)
+        {
+            await _employeeService.AddEmployee(requestModel);
+            return RedirectToAction("EmployeeList");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateEmployee(int Id, EmpInfoRequestModel requestModel)
+        {
+            await _employeeService.UpdateEmployee(Id, requestModel);
+
+            return RedirectToAction("EmployeeList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            await _employeeService.DeleteEmployeeById(id);
+            return RedirectToAction("EmployeeList");
         }
     }
 }

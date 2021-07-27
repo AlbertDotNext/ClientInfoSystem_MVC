@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Exceptions;
+using ApplicationCore.Models;
 using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +26,18 @@ namespace ClientInfoSystemMVC.Controllers
                 throw new NotFoundException("No interactions found");
             }
             return View(interactions);
+        }
+        [HttpGet]
+        public IActionResult AddInteraction()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddInteraction(InteractionRequestModel requestModel)
+        {
+            await _interactionService.AddInteraction(requestModel);
+            return RedirectToAction("InteractionsList");
         }
     }
 }

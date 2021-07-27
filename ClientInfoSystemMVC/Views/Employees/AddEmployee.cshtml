@@ -1,0 +1,28 @@
+﻿@model ApplicationCore.Models.EmpInfoRequestModel 
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<div class="container-fluid">
+    <h1>Add Employee</h1>
+    <form asp-action="AddEmployee">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input type="text" class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input type="password" class="form-control"  asp-for="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Designation">Designation</label>
+            <input type="text" class="form-control" asp-for="Designation">
+            
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Created</button>
+    </form>
+</div>

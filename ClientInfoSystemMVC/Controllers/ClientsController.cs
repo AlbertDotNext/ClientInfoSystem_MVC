@@ -52,13 +52,6 @@ namespace ClientInfoSystemMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteClient()
-        {
-            
-            return View();
-        }
-
-        [HttpPost]
         public async Task<IActionResult> DeleteClient(int id)
         {
             await _clientService.DeleteClientById(id);
