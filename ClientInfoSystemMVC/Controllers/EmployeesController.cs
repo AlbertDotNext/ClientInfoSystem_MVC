@@ -33,6 +33,8 @@ namespace ClientInfoSystemMVC.Controllers
         public async Task<IActionResult> AddEmployee(EmpInfoRequestModel requestModel)
         {
             await _employeeService.AddEmployee(requestModel);
+            if (!ModelState.IsValid) return View();
+
             return RedirectToAction("EmployeeList");
         }
 
@@ -46,6 +48,7 @@ namespace ClientInfoSystemMVC.Controllers
         public async Task<IActionResult> UpdateEmployee(int Id, EmpInfoRequestModel requestModel)
         {
             await _employeeService.UpdateEmployee(Id, requestModel);
+            if (!ModelState.IsValid) return View();
 
             return RedirectToAction("EmployeeList");
         }

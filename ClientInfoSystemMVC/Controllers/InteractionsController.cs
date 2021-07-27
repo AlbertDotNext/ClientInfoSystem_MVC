@@ -57,5 +57,31 @@ namespace ClientInfoSystemMVC.Controllers
             await _interactionService.DeleteInteraction(id);
             return RedirectToAction("InteractionsList");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> InteractionWithClient(int id)
+        {
+            var interactions = await _interactionService.GetClientInteractionsById(id);
+            if (!interactions.Any())
+            {
+           
+                throw new NotFoundException("No interactions found");
+                
+            }
+            return View(interactions);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> InteractionWithEmployee(int id)
+        {
+            var interactions = await _interactionService.GetEmployeeInteractionsById(id);
+            if (!interactions.Any())
+            {
+
+                throw new NotFoundException("No interactions found");
+
+            }
+            return View(interactions);
+        }
     }
 }

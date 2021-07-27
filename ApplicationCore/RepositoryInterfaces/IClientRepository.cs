@@ -9,5 +9,6 @@ namespace ApplicationCore.RepositoryInterfaces
 {
     public interface IClientRepository : IAsyncRepository<Client>
     {
+        Task<Client> GetClientByEmail(string email);
     }
 }

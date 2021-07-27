@@ -33,6 +33,7 @@ namespace ClientInfoSystemMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> UpdateClient(ClientRequestModel clientRequest)
         {
+            if (!ModelState.IsValid) return View();
             await _clientService.UpdateClientById(clientRequest);
             return RedirectToAction("ClientList");
         }

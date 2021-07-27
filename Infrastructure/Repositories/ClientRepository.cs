@@ -15,6 +15,9 @@ namespace Infrastructure.Repositories
         {
         }
 
-        
+        public async Task<Client> GetClientByEmail(string email)
+        {
+            var client = await
+        }
     }
 }
