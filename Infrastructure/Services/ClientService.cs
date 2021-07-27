@@ -14,9 +14,13 @@ namespace Infrastructure.Services
     public class ClientService : IClientService
     {
         private readonly IClientRepository _clientRepository;
-        public ClientService(IClientRepository clientRepository)
+        private readonly IInteractionService _interactionService;
+        private readonly IInteractionRepository _interactionRepository;
+        public ClientService(IClientRepository clientRepository, IInteractionService interactionService, IInteractionRepository interactionRepository)
         {
             _clientRepository = clientRepository;
+            _interactionService = interactionService;
+            _interactionRepository = interactionRepository;
         }
 
         public async Task<List<ClientResponseModel>> GetAllClients()
@@ -70,18 +74,31 @@ namespace Infrastructure.Services
         public async Task DeleteClientById(int id)
         {
             var dbClient = await _clientRepository.GetByIdAsync(id);
-            if(dbClient == null)
+            
+            var dbClientInteraction = await _interactionService.GetClientInteractionsById(id);
+
+            if (dbClientInteraction.Any())
             {
-                throw new NotFoundException("Client not exists");
+                foreach (var item in dbClientInteraction)
+                {
+                    await _interactionService.DeleteInteraction(item.Id);
+                }
             }
+            
+
 
             await _clientRepository.DeleteAsync(dbClient);
 
-            
+
         }
 
         public async Task<ClientResponseModel> AddClient(ClientRequestModel model)
         {
+            var dbClient = await _clientRepository.GetClientByEmail(model.Email);
+            if (dbClient != null)
+            {
+                throw new ConflictException("Client alrady exists");
+            }
             var client = new Client
             {
                 Name = model.Name,
@@ -118,6 +135,27 @@ namespace Infrastructure.Services
                 AddedOn = dbClient.AddedOn
             };
             return clientDetail;
+        }
+
+        public async Task<ClientResponseModel> GetClientByEmail(string email)
+        {
+            var dbClient = await _clientRepository.GetClientByEmail(email);
+            if(dbClient == null)
+            {
+                throw new NotFoundException("Client is not exists");
+            }
+
+            var clientDetail = new ClientResponseModel
+            {
+                Id = dbClient.Id,
+                Name = dbClient.Name,
+                Email = dbClient.Email,
+                Phones = dbClient.Phones,
+                Address = dbClient.Address,
+                AddedOn = dbClient.AddedOn
+            };
+            return clientDetail;
+
         }
     }
 }

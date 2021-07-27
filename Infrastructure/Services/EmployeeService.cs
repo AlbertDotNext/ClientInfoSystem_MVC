@@ -14,10 +14,12 @@ namespace Infrastructure.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IInteractionService _interactionService;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IInteractionService interactionService)
         {
             _employeeRepository = employeeRepository;
+            _interactionService = interactionService;
         }
 
         public async Task<EmpInfoResponseModel> AddEmployee(EmpInfoRequestModel model)
@@ -44,6 +46,18 @@ namespace Infrastructure.Services
         public async Task DeleteEmployeeById(int id)
         {
             var employee = await _employeeRepository.GetByIdAsync(id);
+
+            var employeeInteraction = await _interactionService.GetEmployeeInteractionsById(id);
+
+            if (employeeInteraction.Any())
+            {
+                foreach (var item in employeeInteraction)
+                {
+                    await _interactionService.DeleteInteraction(item.Id);
+                }
+            }
+            
+            
             await _employeeRepository.DeleteAsync(employee);
         }
 
