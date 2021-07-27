@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCore.Models
 {
-    public class Interaction
+    public class InteractionRequestModel
     {
-        public int Id { get; set; }
         public int? ClientId { get; set; }
-        public Client Client { get; set; }
+       
         public int? EmpId { get; set; }
-        public Employee Emp { get; set; }
+        
         public string IntType { get; set; }
         public DateTime? IntDate { get; set; }
         public string Remarks { get; set; }
-
-
     }
 }
