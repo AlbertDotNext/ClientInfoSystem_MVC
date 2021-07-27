@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.RepositoryInterfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            var client = await
+            var client = await _dbContext.Clients.FirstOrDefaultAsync(c => c.Email == email);
+            return client;
         }
     }
 }
