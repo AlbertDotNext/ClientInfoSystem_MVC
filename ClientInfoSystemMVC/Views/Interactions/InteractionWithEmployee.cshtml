@@ -1,16 +1,15 @@
 ﻿@model List<ApplicationCore.Models.InteractionResponseModel>
 @{
-    ViewData["Title"] = "Interactions Page";
 }
 
 <div class="container-fluid">
-    <h1>Interactions Information</h1>
-    <a class="btn btn-success mt-2 mb-2" asp-controller="Interactions" asp-action="AddInteraction">Create Interaction</a>
+    <h1>Employee Interactions Information</h1>
+
     <table class="table table-dark overflow-auto">
         <thead>
             <tr>
-                <th scope="col">ClientName</th>
                 <th scope="col">EmployeeName</th>
+                <th scope="col">ClientName</th>
                 <th scope="col">InteractionType</th>
                 <th scope="col">InteractionDate</th>
                 <th scope="col">Remarks</th>
@@ -22,8 +21,8 @@
             @foreach (var interaction in Model)
             {
                 <tr>
-                    <th scope="row">@interaction.ClientName</th>
-                    <td>@interaction.EmployeeName</td>
+                    <th scope="row">@interaction.EmployeeName</th>
+                    <td>@interaction.ClientName</td>
                     <td>@interaction.IntType</td>
                     <td>@interaction.IntDate.Value.ToShortDateString()</td>
                     <td>@interaction.Remarks</td>

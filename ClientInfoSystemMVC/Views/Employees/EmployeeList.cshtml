@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <h1>Employees Information</h1>
-    <a class="btn btn-success" asp-controller="Employees" asp-action="AddEmployee">Create Employee</a>
+    <a class="btn btn-success mt-2 mb-2" asp-controller="Employees" asp-action="AddEmployee">Create Employee</a>
     <div class="table-responsive">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-dark">
@@ -22,10 +22,10 @@
                     @foreach (var emp in Model)
                     {
                         <tr>
-                            <th scope="row">@emp.Name</th>
+                            <th scope="row"><a asp-controller="Interactions" asp-action="InteractionWithEmployee" asp-route-id="@emp.Id">@emp.Name</a></th>
                             <td>@emp.Designation</td>
 
-                            <td><a class="btn btn-primary" asp-controller="Employees" asp-action="UpdateEmployee" asp-route-id="@emp.Id">Update</a></td>
+                            <td><a class="btn btn-primary" asp-controller="Employees" asp-action="UpdateEmployee" asp-route-id="@emp.Id">Modify</a></td>
                             <td><a class="btn btn-danger" asp-controller="Employees" asp-action="DeleteEmployee" asp-route-id="@emp.Id">Delete</a></td>
                         </tr>
 
