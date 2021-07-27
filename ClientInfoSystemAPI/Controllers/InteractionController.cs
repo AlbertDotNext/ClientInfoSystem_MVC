@@ -47,5 +47,18 @@ namespace ClientInfoSystemAPI.Controllers
             var interaction = await _interactionService.UpdateInteraction(id, requestModel);
             return Ok(interaction);
         }
+
+        [HttpGet]
+        [Route("{clientId:int}")]
+        public async Task<IActionResult> GetClientInteractionsById(int clientId)
+        {
+            var interactions = await _interactionService.GetClientInteractionsById(clientId);
+            if (!interactions.Any())
+            {
+                throw new NotFoundException("No interactions found");
+            }
+
+            return Ok(interactions);
+        }
     }
 }

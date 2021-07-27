@@ -45,6 +45,29 @@ namespace Infrastructure.Services
             return createdInteraction;
         }
 
+        public async Task<List<InteractionResponseModel>> GetClientInteractionsById(int id)
+        {
+            var interactions = await _interactionRepository.GetClientInteractionsById(id);
+
+            var interactionList = new List<InteractionResponseModel>();
+            foreach (var interaction in interactions)
+            {
+                interactionList.Add(new InteractionResponseModel
+                {
+                    Id = interaction.Id,
+                    ClientId = interaction.ClientId,
+                    ClientName = interaction.Client.Name,
+                    EmpId = interaction.EmpId,
+                    EmployeeName = interaction.Emp.Name,
+                    IntType = interaction.IntType,
+                    IntDate = interaction.IntDate,
+                    Remarks = interaction.Remarks
+                });
+            }
+
+            return interactionList;
+        }
+
         public async Task<List<InteractionResponseModel>> GetInteractions()
         {
             var interactions = await _interactionRepository.GetInteractions();

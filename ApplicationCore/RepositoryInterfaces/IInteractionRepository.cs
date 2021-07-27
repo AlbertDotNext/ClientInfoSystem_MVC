@@ -10,5 +10,6 @@ namespace ApplicationCore.RepositoryInterfaces
     public interface IInteractionRepository : IAsyncRepository<Interaction>
     {
         Task<IEnumerable<Interaction>> GetInteractions();
+        Task<IEnumerable<Interaction>> GetClientInteractionsById(int id);
     }
 }
