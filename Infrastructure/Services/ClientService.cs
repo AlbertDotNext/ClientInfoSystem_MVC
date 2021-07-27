@@ -104,5 +104,20 @@ namespace Infrastructure.Services
             var createdClient = await _clientRepository.AddAsync(client);
             return clientResponse;
         }
+
+        public async Task<ClientResponseModel> GetClientById(int id)
+        {
+            var dbClient = await _clientRepository.GetByIdAsync(id);
+            var clientDetail = new ClientResponseModel
+            {
+                Id = dbClient.Id,
+                Name = dbClient.Name,
+                Email = dbClient.Email,
+                Phones = dbClient.Phones,
+                Address = dbClient.Address,
+                AddedOn = dbClient.AddedOn
+            };
+            return clientDetail;
+        }
     }
 }

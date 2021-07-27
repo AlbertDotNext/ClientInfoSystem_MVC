@@ -10,6 +10,7 @@ namespace ApplicationCore.ServiceInterfaces
     public interface IClientService
     {
         Task<List<ClientResponseModel>> GetAllClients();
+        Task<ClientResponseModel> GetClientById(int id);
         Task<ClientResponseModel> AddClient(ClientRequestModel model);
         Task<ClientResponseModel> UpdateClientById(ClientRequestModel model);
         Task DeleteClientById(int id);
