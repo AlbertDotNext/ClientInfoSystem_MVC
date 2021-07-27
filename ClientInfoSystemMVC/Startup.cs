@@ -41,6 +41,9 @@ namespace ClientInfoSystemMVC
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+
+            services.AddScoped<IInteractionRepository, InteractionRepository>();
+            services.AddScoped<IInteractionService, InteractionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

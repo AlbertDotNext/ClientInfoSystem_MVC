@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Models;
+﻿using ApplicationCore.Exceptions;
+using ApplicationCore.Models;
 using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,18 @@ namespace ClientInfoSystemAPI.Controllers
         public InteractionController(IInteractionService interactionService)
         {
             _interactionService = interactionService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetInteractions()
+        {
+            var interactions = await _interactionService.GetInteractions();
+            if (!interactions.Any())
+            {
+                throw new NotFoundException("No interactions found");
+            }
+
+            return Ok(interactions);
         }
 
         [HttpPost]

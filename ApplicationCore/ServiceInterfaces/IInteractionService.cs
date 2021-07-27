@@ -9,6 +9,7 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IInteractionService
     {
+        Task<List<InteractionResponseModel>> GetInteractions();
         Task<InteractionResponseModel> AddInteraction(InteractionRequestModel model);
     }
 }
