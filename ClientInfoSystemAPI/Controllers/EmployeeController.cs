@@ -38,5 +38,14 @@ namespace ClientInfoSystemAPI.Controllers
             var employee = await _employeeService.AddEmployee(requestModel);
             return Ok(employee);
         }
+
+        [HttpPut]
+        [Route("{Id:int}")]
+        public async Task<IActionResult> UpdateEmployee(int Id, [FromBody] EmpInfoRequestModel requestModel)
+        {
+            var employee = await _employeeService.UpdateEmployee(Id, requestModel);
+
+            return Ok(employee);
+        }
     }
 }

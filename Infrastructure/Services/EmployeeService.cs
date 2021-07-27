@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Models;
 using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
@@ -56,6 +57,33 @@ namespace Infrastructure.Services
             }
 
             return empList;
+        }
+
+        public async Task<EmpInfoResponseModel> UpdateEmployee(int id, EmpInfoRequestModel model)
+        {
+            var dbEmployee = await _employeeRepository.GetByIdAsync(id);
+            if (dbEmployee == null)
+            {
+                throw new NotFoundException("No employee found");
+            }
+
+
+            dbEmployee.Name = model.Name;
+            dbEmployee.Password = model.Password;
+            dbEmployee.Designation = model.Designation;
+
+
+            var createdEmployee = await _employeeRepository.UpdateAsync(dbEmployee);
+            var employeeResponse = new EmpInfoResponseModel
+            {
+                Id = createdEmployee.Id,
+                Name = createdEmployee.Name,
+                Password = createdEmployee.Password,
+                Designation = createdEmployee.Designation
+
+
+            };
+            return employeeResponse;
         }
     }
 }
