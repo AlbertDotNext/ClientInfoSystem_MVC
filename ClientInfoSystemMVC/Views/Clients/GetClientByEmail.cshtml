@@ -1,0 +1,31 @@
+﻿@model ApplicationCore.Models.ClientResponseModel
+@{
+}
+<div>
+    <a class="btn btn-success mt-2 mb-2" asp-controller="Clients" asp-action="ClientList">Back To List</a>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phones</th>
+                <th scope="col">Address</th>
+                <th scope="col">AddedOn</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"><a asp-controller="Interactions" asp-action="InteractionWithClient" asp-route-id="@Model.Id">@Model.Name</a></th>
+                <td>@Model.Email</td>
+                <td>@Model.Phones</td>
+                <td>@Model.Address</td>
+                <td>@Model.AddedOn.Value.ToShortDateString()</td>
+                <td><a class="btn btn-primary" asp-controller="Clients" asp-action="UpdateClient" asp-route-id="@Model.Id">Modify</a></td>
+                <td><a class="btn btn-danger " asp-controller="Clients" asp-action="DeleteClient" asp-route-id="@Model.Id">Delete</a></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

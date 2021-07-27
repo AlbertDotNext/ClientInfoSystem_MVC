@@ -11,6 +11,7 @@ namespace ApplicationCore.ServiceInterfaces
     {
         Task<List<ClientResponseModel>> GetAllClients();
         Task<ClientResponseModel> GetClientById(int id);
+        Task<ClientResponseModel> GetClientByEmail(string email);
         Task<ClientResponseModel> AddClient(ClientRequestModel model);
         Task<ClientResponseModel> UpdateClientById(ClientRequestModel model);
         Task DeleteClientById(int id);

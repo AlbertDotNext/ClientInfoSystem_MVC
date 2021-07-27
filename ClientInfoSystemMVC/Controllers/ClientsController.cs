@@ -58,5 +58,12 @@ namespace ClientInfoSystemMVC.Controllers
             await _clientService.DeleteClientById(id);
             return RedirectToAction("ClientList");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetClientByEmail(string email)
+        {
+            var client = await _clientService.GetClientByEmail(email);
+            return View(client);
+        }
     }
 }

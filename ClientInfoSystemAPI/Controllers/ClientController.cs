@@ -60,5 +60,13 @@ namespace ClientInfoSystemAPI.Controllers
             await _clientService.DeleteClientById(id);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("Email")]
+        public async Task<IActionResult> GetClientByEmail(string email)
+        {
+            var client = await _clientService.GetClientByEmail(email);
+            return Ok(client);
+        }
     }
 }
