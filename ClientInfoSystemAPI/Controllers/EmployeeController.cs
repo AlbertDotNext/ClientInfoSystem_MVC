@@ -47,5 +47,14 @@ namespace ClientInfoSystemAPI.Controllers
 
             return Ok(employee);
         }
+
+        [HttpDelete]
+        [Route("{Id:int}")]
+        public async Task<IActionResult> DeleteEmployee(int Id)
+        {
+            await _employeeService.DeleteEmployeeById(Id);
+
+            return Ok();
+        }
     }
 }

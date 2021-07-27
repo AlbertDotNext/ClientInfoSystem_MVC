@@ -41,6 +41,12 @@ namespace Infrastructure.Services
             return empResponse;
         }
 
+        public async Task DeleteEmployeeById(int id)
+        {
+            var employee = await _employeeRepository.GetByIdAsync(id);
+            await _employeeRepository.DeleteAsync(employee);
+        }
+
         public async Task<List<EmpInfoResponseModel>> GetAllEmps()
         {
             var employees = await _employeeRepository.ListAllAsync();
