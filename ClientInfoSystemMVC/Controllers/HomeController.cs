@@ -23,11 +23,7 @@ namespace ClientInfoSystemMVC.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> ClientList()
-        {
-            var clients = await _clientService.GetAllClients();
-            return View(clients);
-        }
+        
 
         public IActionResult Privacy()
         {
