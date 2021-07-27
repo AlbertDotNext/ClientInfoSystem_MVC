@@ -73,5 +73,13 @@ namespace ClientInfoSystemAPI.Controllers
 
             return Ok(interactions);
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteInteraction(int id)
+        {
+            await _interactionService.DeleteInteraction(id);
+            return Ok();
+        }
     }
 }
