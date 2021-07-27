@@ -17,6 +17,9 @@ namespace ApplicationCore.Models
         [EmailAddress]
         [StringLength(64)]
         public string Email { get; set; }
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string Phones { get; set; }
         public string Address { get; set; }
         public DateTime? AddedOn { get; set; }

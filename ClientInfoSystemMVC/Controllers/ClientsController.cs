@@ -24,17 +24,17 @@ namespace ClientInfoSystemMVC.Controllers
             return View(clients);
         }
         [HttpGet]
-        public async Task<IActionResult> UpdateClient(int id)
+        public IActionResult UpdateClient(int id)
         {
-            await _clientService.GetClientById(id);
+            
             return View();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateClient([FromBody] ClientRequestModel clientRequest)
+        [HttpPost]
+        public async Task<ActionResult> UpdateClient(ClientRequestModel clientRequest)
         {
             await _clientService.UpdateClientById(clientRequest);
-            return View();
+            return RedirectToAction("ClientList");
         }
 
         [HttpGet]
@@ -44,17 +44,25 @@ namespace ClientInfoSystemMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddClient([FromBody] ClientRequestModel clientRequest)
+        public async Task<IActionResult> AddClient(ClientRequestModel clientRequest)
         {
+            if (!ModelState.IsValid) return View();
             var client = await _clientService.AddClient(clientRequest);
-            return RedirectToAction("Index");
+            return RedirectToAction("ClientList");
         }
 
-        [HttpDelete]
+        [HttpGet]
+        public IActionResult DeleteClient()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> DeleteClient(int id)
         {
             await _clientService.DeleteClientById(id);
-            return LocalRedirect("~/");
+            return RedirectToAction("ClientList");
         }
     }
 }

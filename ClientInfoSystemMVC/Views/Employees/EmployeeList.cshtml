@@ -6,30 +6,35 @@
 <div class="container-fluid">
     <h1>Employees Information</h1>
     @*<a class="btn btn-primary" asp-controller="Clients" asp-action="AddClient">Add Client</a>*@
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Designation</th>
-                
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var emp in Model)
-            {
-                <tr>
-                    <th scope="row">@emp.Name</th>
-                    <td>@emp.Designation</td>
-                    
-                    <td><a class="btn btn-primary" >Update</a></td>
-                    <td><a class="btn btn-danger" >Delete</a></td>
-                </tr>
+    <div class="table-responsive">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Designation</th>
 
-            }
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in Model)
+                    {
+                        <tr>
+                            <th scope="row">@emp.Name</th>
+                            <td>@emp.Designation</td>
+
+                            <td><a class="btn btn-primary">Update</a></td>
+                            <td><a class="btn btn-danger">Delete</a></td>
+                        </tr>
+
+                    }
 
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
 </div>
