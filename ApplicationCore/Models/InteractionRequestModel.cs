@@ -8,9 +8,9 @@ namespace ApplicationCore.Models
 {
     public class InteractionRequestModel
     {
-        public int? ClientId { get; set; }
+        public int ClientId { get; set; }
        
-        public int? EmpId { get; set; }
+        public int EmpId { get; set; }
         
         public string IntType { get; set; }
         public DateTime? IntDate { get; set; }

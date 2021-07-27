@@ -14,12 +14,12 @@ namespace Infrastructure.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly IInteractionService _interactionService;
+        private readonly IInteractionRepository _interactionRepository;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IInteractionService interactionService)
+        public EmployeeService(IEmployeeRepository employeeRepository, IInteractionRepository interactionRepository)
         {
             _employeeRepository = employeeRepository;
-            _interactionService = interactionService;
+            _interactionRepository = interactionRepository;
         }
 
         public async Task<EmpInfoResponseModel> AddEmployee(EmpInfoRequestModel model)
@@ -47,13 +47,13 @@ namespace Infrastructure.Services
         {
             var employee = await _employeeRepository.GetByIdAsync(id);
 
-            var employeeInteraction = await _interactionService.GetEmployeeInteractionsById(id);
+            var employeeInteraction = await _interactionRepository.GetEmployeeInteractionsById(id);
 
             if (employeeInteraction.Any())
             {
                 foreach (var item in employeeInteraction)
                 {
-                    await _interactionService.DeleteInteraction(item.Id);
+                    await _interactionRepository.DeleteAsync(item);
                 }
             }
             
@@ -77,6 +77,19 @@ namespace Infrastructure.Services
             }
 
             return empList;
+        }
+
+        public async Task<EmpInfoResponseModel> GetEmployeeById(int id)
+        {
+            var employee = await _employeeRepository.GetByIdAsync(id);
+            var employeeResponse = new EmpInfoResponseModel
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Password = employee.Password,
+                Designation = employee.Designation
+            };
+            return employeeResponse;
         }
 
         public async Task<EmpInfoResponseModel> UpdateEmployee(int id, EmpInfoRequestModel model)

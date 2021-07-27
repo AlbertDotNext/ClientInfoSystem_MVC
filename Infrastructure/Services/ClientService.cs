@@ -14,13 +14,13 @@ namespace Infrastructure.Services
     public class ClientService : IClientService
     {
         private readonly IClientRepository _clientRepository;
-        private readonly IInteractionService _interactionService;
         private readonly IInteractionRepository _interactionRepository;
-        public ClientService(IClientRepository clientRepository, IInteractionService interactionService, IInteractionRepository interactionRepository)
+        
+        public ClientService(IClientRepository clientRepository, IInteractionRepository interactionRepository)
         {
             _clientRepository = clientRepository;
-            _interactionService = interactionService;
             _interactionRepository = interactionRepository;
+            
         }
 
         public async Task<List<ClientResponseModel>> GetAllClients()
@@ -74,14 +74,14 @@ namespace Infrastructure.Services
         public async Task DeleteClientById(int id)
         {
             var dbClient = await _clientRepository.GetByIdAsync(id);
-            
-            var dbClientInteraction = await _interactionService.GetClientInteractionsById(id);
+
+            var dbClientInteraction = await _interactionRepository.GetClientInteractionsById(id);
 
             if (dbClientInteraction.Any())
             {
                 foreach (var item in dbClientInteraction)
                 {
-                    await _interactionService.DeleteInteraction(item.Id);
+                    await _interactionRepository.DeleteAsync(item);
                 }
             }
             

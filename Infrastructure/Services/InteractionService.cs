@@ -14,14 +14,28 @@ namespace Infrastructure.Services
     public class InteractionService : IInteractionService
     {
         private readonly IInteractionRepository _interactionRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public InteractionService(IInteractionRepository interactionRepository)
+        public InteractionService(IInteractionRepository interactionRepository, IClientRepository clientRepository, IEmployeeRepository employeeRepository)
         {
             _interactionRepository = interactionRepository;
+            _clientRepository = clientRepository;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<InteractionResponseModel> AddInteraction(InteractionRequestModel model)
         {
+            var client = await _clientRepository.GetByIdAsync(model.ClientId);
+            if(client == null)
+            {
+                throw new NotFoundException("Client does not exists");
+            }
+            var employee = await _employeeRepository.GetByIdAsync(model.EmpId);
+            if(employee == null)
+            {
+                throw new NotFoundException("Employee does not exists");
+            }
             var interaction = new Interaction
             {
                 ClientId = model.ClientId,
