@@ -45,6 +45,12 @@ namespace Infrastructure.Services
             return createdInteraction;
         }
 
+        public async Task DeleteInteraction(int id)
+        {
+            var interaction = await _interactionRepository.GetByIdAsync(id);
+            await _interactionRepository.DeleteAsync(interaction);
+        }
+
         public async Task<List<InteractionResponseModel>> GetClientInteractionsById(int id)
         {
             var interactions = await _interactionRepository.GetClientInteractionsById(id);

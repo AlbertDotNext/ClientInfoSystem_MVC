@@ -39,5 +39,23 @@ namespace ClientInfoSystemMVC.Controllers
             await _interactionService.AddInteraction(requestModel);
             return RedirectToAction("InteractionsList");
         }
+
+        [HttpGet]
+        public IActionResult UpdateInteraction()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateInteraction(int id, InteractionRequestModel requestModel)
+        {
+            await _interactionService.UpdateInteraction(id, requestModel);
+            return RedirectToAction("InteractionsList");
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteInteraction(int id)
+        {
+            await _interactionService.DeleteInteraction(id);
+            return RedirectToAction("InteractionsList");
+        }
     }
 }
