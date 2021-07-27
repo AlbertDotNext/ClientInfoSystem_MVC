@@ -49,10 +49,23 @@ namespace ClientInfoSystemAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{clientId:int}")]
+        [Route("Client/{clientId:int}")]
         public async Task<IActionResult> GetClientInteractionsById(int clientId)
         {
             var interactions = await _interactionService.GetClientInteractionsById(clientId);
+            if (!interactions.Any())
+            {
+                throw new NotFoundException("No interactions found");
+            }
+
+            return Ok(interactions);
+        }
+
+        [HttpGet]
+        [Route("Employee/{empId:int}")]
+        public async Task<IActionResult> GetEmployeeInteractionsById(int empId)
+        {
+            var interactions = await _interactionService.GetEmployeeInteractionsById(empId);
             if (!interactions.Any())
             {
                 throw new NotFoundException("No interactions found");

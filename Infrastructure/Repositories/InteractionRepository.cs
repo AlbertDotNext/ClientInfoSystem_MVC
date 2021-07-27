@@ -18,16 +18,22 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Interaction>> GetClientInteractionsById(int id)
         {
-            var interaction = await _dbContext.Interatctions.Where(i => i.ClientId == id).Include(i => i.Client).Include(i => i.Emp).ToListAsync();
+            var interactions = await _dbContext.Interatctions.Where(i => i.ClientId == id).Include(i => i.Client).Include(i => i.Emp).ToListAsync();
 
-            return interaction;
+            return interactions;
+        }
+
+        public async Task<IEnumerable<Interaction>> GetEmployeeInteractionsById(int id)
+        {
+            var interactions = await _dbContext.Interatctions.Where(i => i.EmpId == id).Include(i => i.Client).Include(i => i.Emp).ToListAsync();
+            return interactions;
         }
 
         public async Task<IEnumerable<Interaction>> GetInteractions()
         {
-            var interaction = await _dbContext.Interatctions.Include(i => i.Client).Include(i => i.Emp).ToListAsync();
+            var interactions = await _dbContext.Interatctions.Include(i => i.Client).Include(i => i.Emp).ToListAsync();
 
-            return interaction;
+            return interactions;
         }
     }
 }

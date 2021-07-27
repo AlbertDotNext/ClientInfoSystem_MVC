@@ -11,5 +11,6 @@ namespace ApplicationCore.RepositoryInterfaces
     {
         Task<IEnumerable<Interaction>> GetInteractions();
         Task<IEnumerable<Interaction>> GetClientInteractionsById(int id);
+        Task<IEnumerable<Interaction>> GetEmployeeInteractionsById(int id);
     }
 }
