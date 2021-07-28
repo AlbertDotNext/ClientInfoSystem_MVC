@@ -28,7 +28,7 @@
                     <td>@interaction.IntDate.Value.ToShortDateString()</td>
                     <td>@interaction.Remarks</td>
                     <td><a class="btn btn-primary" asp-controller="Interactions" asp-action="UpdateInteraction" asp-route-id="@interaction.Id">Modify</a></td>
-                    <td><a class="btn btn-danger" asp-controller="Interactions" asp-action="DeleteInteraction" asp-route-id="@interaction.Id">Delete</a></td>
+                    <td><a class="btn btn-danger" asp-controller="Interactions" asp-action="DeleteInteraction" asp-route-id="@interaction.Id" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
                 </tr>
 
             }

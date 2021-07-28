@@ -61,10 +61,7 @@ namespace ClientInfoSystemMVC.Controllers
             var interactions = await _interactionService.GetClientInteractionsById(id);
             if (!interactions.Any())
             {
-
-                //throw new NotFoundException("No interactions found");
                 return View("_NotFound", "Shared");
-                
             }
             return View(interactions);
         }
@@ -75,10 +72,7 @@ namespace ClientInfoSystemMVC.Controllers
             var interactions = await _interactionService.GetEmployeeInteractionsById(id);
             if (!interactions.Any())
             {
-
-                //throw new NotFoundException("No interactions found");
                 return View("_NotFound", "Shared");
-
             }
             return View(interactions);
         }

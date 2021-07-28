@@ -46,7 +46,7 @@
                 <td>@client.Address</td>
                 <td>@client.AddedOn.Value.ToShortDateString()</td>
                 <td><a class="btn btn-primary" asp-controller="Clients" asp-action="UpdateClient" asp-route-id="@client.Id">Modify</a></td>
-                <td><a class="btn btn-danger " asp-controller="Clients" asp-action="DeleteClient" asp-route-id="@client.Id">Delete</a></td>
+                <td><a class="btn btn-danger " asp-controller="Clients" asp-action="DeleteClient" asp-route-id="@client.Id" onclick="return confirm('Are you sure to delete @client.Name?')">Delete</a></td>
             </tr>
                 
             }

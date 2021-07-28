@@ -28,7 +28,7 @@
                         <td>@emp.Designation</td>
 
                         <td><a class="btn btn-primary" asp-controller="Employees" asp-action="UpdateEmployee" asp-route-id="@emp.Id">Modify</a></td>
-                        <td><a class="btn btn-danger" asp-controller="Employees" asp-action="DeleteEmployee" asp-route-id="@emp.Id">Delete</a></td>
+                        <td><a class="btn btn-danger" asp-controller="Employees" asp-action="DeleteEmployee" asp-route-id="@emp.Id" onclick="return confirm('Are you sure to delete @emp.Name?')">Delete</a></td>
                     </tr>
 
                     }

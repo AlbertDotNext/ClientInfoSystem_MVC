@@ -1,0 +1,33 @@
+﻿@using ApplicationCore.ServiceInterfaces
+@inject ICurrentEmployee currentEmployee
+
+@{
+    ViewData["Title"] = "Nav Bar Login";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="navbar-collapse collapse dropdown">
+        <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user mr-1"></i>@currentEmployee.Name
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" asp-controller="Employees" asp-action="GetEmployeeById" asp-route-id="@currentEmployee.EmployeeId">View Profile</a></li>
+            <li><a class="dropdown-item" asp-controller="Employees" asp-action="UpdateEmployee" asp-route-id="@currentEmployee.EmployeeId">Edit Profile</a></li>
+            <li><a class="dropdown-item" asp-controller="Interactions" asp-action="InteractionWithEmployee" asp-route-id="@currentEmployee.EmployeeId">Interactions</a></li>
+            <li><a class="dropdown-item" asp-controller="Employees" asp-action="EmployeeLogout">Log Out</a></li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item pr-4">
+                <a asp-controller="Employees" asp-action="EmployeeLogin"><i class="fas fa-user mr-1"></i><span>Emoloyee Login</span> </a>
+            </li>
+            
+        </ul>
+    </div>
+}
