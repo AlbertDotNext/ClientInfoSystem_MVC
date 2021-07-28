@@ -14,11 +14,13 @@ All functionality in this project was built primarily with ASP.Net Core, Entity 
 ## User Stories
 
 - As a User, I should be able to view dashboard in main page.
-  <img src="" width="500">
+  <img src="Homepage.png" width="500">
 - As a User, I should be able to view all the clients.
-  <img src=" width="500">
+  <img src="ClientPage.png" width="500">
 - As a User, I should be able to browse all employees list, and have it connected to the clients with interactions.
 
-  <img src="" width="500">
+  <img src="InteractionPage.png" width="500">
+  <img src="ClientInteraction.png" width="500">
+  
 
 
