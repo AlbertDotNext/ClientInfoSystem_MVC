@@ -32,7 +32,8 @@ All functionality in this project was built primarily with ASP.Net Core, Entity 
   <img src="ModifyEmployee.png" width="500">
   
 - As a User, I should be able to browse all employees list, and have it connected to the clients with interactions.
-
+  
+  <img src="EmployeesPage.png.png" width="500">
   <img src="InteractionPage.png" width="500">
   <img src="ClientInteraction.png" width="500">
   
