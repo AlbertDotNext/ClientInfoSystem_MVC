@@ -66,5 +66,12 @@ namespace ClientInfoSystemMVC.Controllers
             var client = await _clientService.GetClientByEmail(email);
             return View(client);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClientById(int id)
+        {
+            var client = await _clientService.GetClientById(id);
+            return View(client);
+        }
     }
 }

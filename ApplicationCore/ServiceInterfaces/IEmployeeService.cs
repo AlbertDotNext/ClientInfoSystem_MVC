@@ -14,5 +14,6 @@ namespace ApplicationCore.ServiceInterfaces
         Task<EmpInfoResponseModel> UpdateEmployee(int id, EmpInfoRequestModel model);
         Task<EmpInfoResponseModel> GetEmployeeById(int id);
         Task DeleteEmployeeById(int id);
+        Task<EmpInfoResponseModel> Login(int id, string name, string password);
     }
 }

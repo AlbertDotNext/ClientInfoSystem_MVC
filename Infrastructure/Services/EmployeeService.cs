@@ -3,9 +3,11 @@ using ApplicationCore.Exceptions;
 using ApplicationCore.Models;
 using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +26,11 @@ namespace Infrastructure.Services
 
         public async Task<EmpInfoResponseModel> AddEmployee(EmpInfoRequestModel model)
         {
+
+            //var salt = CreateSalt();
+
+            //var hashedPassword = HashPassword(model.Password, salt);
+
             var employee = new Employee
             {
                 Name = model.Name,
@@ -31,17 +38,42 @@ namespace Infrastructure.Services
                 Designation = model.Designation
             };
 
+            var createdEmployee = await _employeeRepository.AddAsync(employee);
+
             var empResponse = new EmpInfoResponseModel
             {
-                Id = employee.Id,
-                Name = employee.Name,
-                Password = employee.Password,
-                Designation = employee.Designation
+                Id = createdEmployee.Id,
+                Name = createdEmployee.Name,
+                Password = createdEmployee.Password,
+                Designation = createdEmployee.Designation
             };
 
-            var createdEmployee = await _employeeRepository.AddAsync(employee);
+            
             return empResponse;
         }
+
+        //private string CreateSalt()
+        //{
+        //    byte[] randomBytes = new byte[128 / 8];
+        //    using (var rng = RandomNumberGenerator.Create())
+        //    {
+        //        rng.GetBytes(randomBytes);
+        //    }
+
+        //    return Convert.ToBase64String(randomBytes);
+        //}
+
+        //private string HashPassword(string password, string salt)
+        //{
+            
+        //    var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+        //                                                            password: password,
+        //                                                            salt: Convert.FromBase64String(salt),
+        //                                                            prf: KeyDerivationPrf.HMACSHA512,
+        //                                                            iterationCount: 10000,
+        //                                                            numBytesRequested: 256 / 8));
+        //    return hashed;
+        //}
 
         public async Task DeleteEmployeeById(int id)
         {
@@ -90,6 +122,30 @@ namespace Infrastructure.Services
                 Designation = employee.Designation
             };
             return employeeResponse;
+        }
+
+        public async Task<EmpInfoResponseModel> Login(int id, string name, string password)
+        {
+            var dbEmployee = await _employeeRepository.GetByIdAsync(id);
+            if(dbEmployee == null)
+            {
+                throw new NotFoundException("Employee account does not exists");
+            }
+
+            if(password == dbEmployee.Password)
+            {
+                var employeeResponse = new EmpInfoResponseModel
+                {
+                    Id = dbEmployee.Id,
+                    Name = dbEmployee.Name,
+                    Designation = dbEmployee.Designation
+
+                };
+
+                return employeeResponse;
+            }
+
+            return null;
         }
 
         public async Task<EmpInfoResponseModel> UpdateEmployee(int id, EmpInfoRequestModel model)

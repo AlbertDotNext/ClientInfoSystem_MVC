@@ -1,9 +1,22 @@
-﻿
+﻿@using ApplicationCore.ServiceInterfaces
+@inject ICurrentEmployee currentEmployee
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid ">
-    <h1 class="text-center">Welcome to the Client Information System</h1>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid ">
+        <h1 class="text-center">Welcome back @currentEmployee.Name</h1>
+        <a type="button" class="btn btn-primary btn-lg btn-block" asp-controller="Employees" asp-action="EmployeeLogout">Employee Sign Out</a>
+    </div>
+}
+else
+{
+    <div class="container-fluid ">
+        <h1 class="text-center">Welcome to the Client Information System</h1>
+        <a type="button" class="btn btn-primary btn-lg btn-block" asp-controller="Employees" asp-action="EmployeeLogin">Employee Sign In</a>
+    </div>
+}
+

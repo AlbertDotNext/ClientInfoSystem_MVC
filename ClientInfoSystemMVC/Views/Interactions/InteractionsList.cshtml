@@ -22,8 +22,8 @@
             @foreach (var interaction in Model)
             {
                 <tr>
-                    <th scope="row">@interaction.ClientName</th>
-                    <td>@interaction.EmployeeName</td>
+                    <th scope="row"><a asp-controller="Clients" asp-action="GetClientById" asp-route-id="@interaction.ClientId">@interaction.ClientName</a></th>
+                    <td><a asp-controller="Employees" asp-action="GetEmployeeById" asp-route-id="@interaction.EmpId">@interaction.EmployeeName</a></td>
                     <td>@interaction.IntType</td>
                     <td>@interaction.IntDate.Value.ToShortDateString()</td>
                     <td>@interaction.Remarks</td>
