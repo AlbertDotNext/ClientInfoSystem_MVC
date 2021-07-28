@@ -21,10 +21,7 @@ namespace ClientInfoSystemMVC.Controllers
         public async Task<IActionResult> InteractionsList()
         {
             var interactions = await _interactionService.GetInteractions();
-            if (!interactions.Any())
-            {
-                throw new NotFoundException("No interactions found");
-            }
+            
             return View(interactions);
         }
         [HttpGet]
@@ -64,8 +61,9 @@ namespace ClientInfoSystemMVC.Controllers
             var interactions = await _interactionService.GetClientInteractionsById(id);
             if (!interactions.Any())
             {
-           
-                throw new NotFoundException("No interactions found");
+
+                //throw new NotFoundException("No interactions found");
+                return View("_NotFound", "Shared");
                 
             }
             return View(interactions);
@@ -78,7 +76,8 @@ namespace ClientInfoSystemMVC.Controllers
             if (!interactions.Any())
             {
 
-                throw new NotFoundException("No interactions found");
+                //throw new NotFoundException("No interactions found");
+                return View("_NotFound", "Shared");
 
             }
             return View(interactions);

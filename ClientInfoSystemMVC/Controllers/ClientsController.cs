@@ -21,6 +21,7 @@ namespace ClientInfoSystemMVC.Controllers
         public async Task<IActionResult> ClientList()
         {
             var clients = await _clientService.GetAllClients();
+            
             return View(clients);
         }
         [HttpGet]

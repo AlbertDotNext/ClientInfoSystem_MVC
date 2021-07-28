@@ -20,6 +20,7 @@ namespace ClientInfoSystemMVC.Controllers
         public async Task<IActionResult> EmployeeList()
         {
             var employees = await _employeeService.GetAllEmps();
+            
             return View(employees);
         }
 
