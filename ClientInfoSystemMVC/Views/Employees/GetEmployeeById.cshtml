@@ -1,4 +1,6 @@
 ﻿@model ApplicationCore.Models.EmpInfoResponseModel
+@using ApplicationCore.ServiceInterfaces
+@inject ICurrentEmployee currentEmployee
 @{
     ViewData["Title"] = "Employee detail";
 }
@@ -23,7 +25,17 @@
                 <td>@Model.Designation</td>
 
                 <td><a class="btn btn-primary" asp-controller="Employees" asp-action="UpdateEmployee" asp-route-id="@Model.Id">Modify</a></td>
-                <td><a class="btn btn-danger" asp-controller="Employees" asp-action="DeleteEmployee" asp-route-id="@Model.Id">Delete</a></td>
+                @if (Model.Id == currentEmployee.EmployeeId)
+                {
+
+
+                    <td><button class="btn btn-danger" disabled>Delete</button></td>
+                }
+                else
+                {
+                    <td><a class="btn btn-danger" asp-controller="Employees" asp-action="DeleteEmployee" asp-route-id="@Model.Id">Delete</a></td>
+                }
+
             </tr>
 
         </tbody>
