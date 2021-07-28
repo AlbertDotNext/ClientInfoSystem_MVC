@@ -48,7 +48,7 @@ namespace Infrastructure.Services
             var dbClient = await _clientRepository.GetByIdAsync(model.Id);
             if(dbClient == null)
             {
-                throw new NotFoundException("The client is not exists, please add this client first");
+                throw new NotFoundException("The client does not exists, please add this client first");
             }
 
 
